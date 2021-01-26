@@ -19,10 +19,10 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/page")
-    public Result page(String name,Integer start,Integer end){
+    public Result page(String name,Integer currentPage,Integer size){
         Result result = new Result();
         try {
-            IPage<User> page = userService.page(name, start, end);
+            IPage<User> page = userService.page(name, currentPage, size);
             result.setCode(0);
             result.setData(page);
         } catch (Exception e) {

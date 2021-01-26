@@ -31,7 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public IPage<User> page(String name, Integer start, Integer end) {
         Page<User> userPage = new Page<>(start,end);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like(!StringUtils.isBlank(name),"username",name);
+        queryWrapper.like(StringUtils.isBlank(name),"username",name);
         Page<User> userPage1 = userMapper.selectPage(userPage, queryWrapper);
         for (User record : userPage1.getRecords()) {
             record.setRole(roleService.getById(record.getUserRole()));
